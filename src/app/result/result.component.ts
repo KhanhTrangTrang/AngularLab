@@ -15,7 +15,7 @@ export class ResultComponent implements OnInit {
     if (!this.sevrice.isLogin())
       this.logout();
   }
-
+  //Thoát khỏi ứng dụng
   logout(): void {
     localStorage.removeItem('user');
     this.rounter.navigate(['/login']);

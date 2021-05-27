@@ -32,6 +32,7 @@ export class DetailComponent implements OnInit {
     this.setEmployeeDetails();
   }
 
+  // Lấy thông tin nhân viên từ data base
   setEmployeeDetails(): void
   {
 
@@ -45,6 +46,7 @@ export class DetailComponent implements OnInit {
     }
     
   }
+  // Chọn update thông tin nhân viên
   updateEmployee(): void
   {
     //Warning
@@ -85,6 +87,7 @@ export class DetailComponent implements OnInit {
     this.employeeService.Current = this.employee;
     this.rounter.navigate(['/update']);
   }
+  // Chọn delete thông tin nhân viên
   deleteEmployee(): void
   {
     const type: ConfirmType = ConfirmType.Delete;
@@ -92,10 +95,11 @@ export class DetailComponent implements OnInit {
     this.employeeService.Current = this.employee;
     this.rounter.navigate(['/delete']);
   }
+  // Trở lại trang quản lí thông tin nhân viên
   goBack(): void {
     this.location.back();
   }
-
+  //Thoát khỏi ứng dụng
   logout(): void {
     localStorage.removeItem('user');
     this.rounter.navigate(['/login']);

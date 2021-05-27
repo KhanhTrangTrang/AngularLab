@@ -20,9 +20,11 @@ export class ConfirmComponent implements OnInit {
     this.init();
   }
 
+  // Điều khiển hiển thị cảnh báo
   hideWarning = true;
-
+  // Nội dung cảnh báo
   messages: string[] = [];
+  //Điều khiển hiển thị add form
 
   private hideAdd = false;
   public get HideAdd(): boolean {
@@ -31,7 +33,7 @@ export class ConfirmComponent implements OnInit {
   public set HideAdd(v: boolean) {
     this.hideAdd = v;
   }
-
+  // Điều khiển hiển thị update form
   private hideUpdate = false;
   public get HideUpdate(): boolean {
     return this.hideUpdate;
@@ -39,7 +41,7 @@ export class ConfirmComponent implements OnInit {
   public set HideUpdate(v: boolean) {
     this.hideUpdate = v;
   }
-
+  // Điều khiển hiển thị delete form
   private hideDelete = false;
   public get HideDelete(): boolean {
     return this.hideDelete;
@@ -47,7 +49,7 @@ export class ConfirmComponent implements OnInit {
   public set HideDelete(v: boolean) {
     this.hideDelete = v;
   }
-
+  // Khởi tạo
   init(): void {
     const type = this.employeeService.Type;
     if (type === ConfirmType.Add) {
@@ -66,11 +68,11 @@ export class ConfirmComponent implements OnInit {
       this.hideUpdate = true;
     }
   }
-
+  // Trở về trang details
   goBack(): void {
     this.location.back();
   }
-
+  // Xác nhận thêm nhân viên
   OKAdd(): void {
     //Warning
     this.messages = [];
@@ -105,9 +107,8 @@ export class ConfirmComponent implements OnInit {
       this.hideWarning = false;
       return;
     }
-      
-
-
+    
+    // Đăng kí thành công
     this.employeeService.Message = "Đăng kí thành công";
     this.employeeService.addEmployee().subscribe((res) => {
       console.log(res);
@@ -119,6 +120,8 @@ export class ConfirmComponent implements OnInit {
     );
     this.router.navigate(['/result']);
   }
+
+  // Xác nhập cập nhật thông tin
   OKUpdate(): void {
     this.employeeService.Message = "Updat thông tin thành công";
     this.employeeService.updateEmployee().subscribe((res) => {
@@ -132,6 +135,7 @@ export class ConfirmComponent implements OnInit {
     this.router.navigate(['/result']);
   }
 
+  //Xác nhận xóa nhân viên
   OKDelete(): void {
     this.employeeService.Message = "Delete thông tin thành công";
     this.employeeService.deleteEmployee().subscribe((res) => {
@@ -145,6 +149,7 @@ export class ConfirmComponent implements OnInit {
     this.router.navigate(['/result']);
   }
 
+  // Thoát khỏi ứng dụng
   logout(): void {
     localStorage.removeItem('user');
     this.router.navigate(['/login']);

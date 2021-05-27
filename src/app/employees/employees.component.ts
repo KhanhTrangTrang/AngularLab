@@ -26,7 +26,7 @@ export class EmployeesComponent implements OnInit {
   }
 
   employees: Employee[] = [];
-
+  // Khởi tạo thông tin nhân viên, chỉ số trang hiện tại
   setEmployees(employees: Employee[]): void {
     this.hideWarningSearching = true;
     this.employeesService.empoyees = employees;
@@ -41,7 +41,7 @@ export class EmployeesComponent implements OnInit {
     this.pageSize = 5;
 
   }
-
+  // Lấy ra tất cả nhân viên đã lưu vào data base
   getEmployees(): void {
     if (!this.employeesService.isLogin())
       this.logout();
@@ -54,6 +54,7 @@ export class EmployeesComponent implements OnInit {
   //   this.searching = '';
   //   this.hideWarningSearching = true;
   // }
+  // Lựa chọn để thêm nhân viên mới
   addEmployee(): void {
     this.employeesService.Type = ConfirmType.Add;
     const employee: Employee = {
@@ -65,11 +66,12 @@ export class EmployeesComponent implements OnInit {
     this.employeesService.Current = employee;
     this.router.navigate(['/add']);
   }
+  //Thoát khỏi ứng dụng
   logout(): void {
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
-
+  // Xử lí việc thay đổi trang
   handlePageChange(event: any): void {
     this.page = event;
   }

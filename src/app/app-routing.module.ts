@@ -6,6 +6,7 @@ import { EmployeesComponent } from './employees/employees.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { ResultComponent } from './result/result.component';
 
+// Tất cả các rounter dùng trong app
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginFormComponent},

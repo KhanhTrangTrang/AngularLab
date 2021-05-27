@@ -25,7 +25,9 @@ export class LoginFormComponent implements OnInit {
   ) { }
 
   submitted = false;
+  // Hiển thị cảnh báo khi nhập vào thông tin đăng nhập sai
   hideWaring = true;
+  //Thực hiện login
   onSubmit(): void {
     this.submitted = true; 
 
@@ -43,6 +45,7 @@ export class LoginFormComponent implements OnInit {
       ...this.checkoutForm.value,
       token: 'fake-login-token'
     }
+    // Lưu thông tin đăng nhập người dùng vào để kiểm tra quyền đã login hay chưa
     localStorage.setItem('user', JSON.stringify(user));
     this.router.navigate(['/employees']);
     this.checkoutForm.reset();
