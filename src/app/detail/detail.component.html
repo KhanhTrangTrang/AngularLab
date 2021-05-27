@@ -1,0 +1,37 @@
+<div class="container p-5 m-5 border rounded">
+
+    <button class="btn btn-primary w-15 float-right" (click)="logout()">Logout</button>
+    <h3>Biên soạn thông tin nhân viên</h3>
+    <div [hidden] = "hideWarning" class="text-danger mt-4 mb-4">
+        <ul>
+            <li *ngFor="let message of messages">
+                <div class="text-danger mt-4 mb-4">
+                    {{message}}
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="d-flex justify-content-between p-1">
+        <label for="id" class="w-50">Id: </label>
+        <input id="id" class="w-100" type="text" [(ngModel)]="employee.id" placeholder="employee.id">
+    </div>
+
+    <div class="d-flex justify-content-between p-1">
+        <label for="name" class="w-50">Name: </label>
+        <input id="name" class="w-100" type="text" [(ngModel)]="employee.name" placeholder="employee.name">
+    </div>
+    <div class="d-flex justify-content-between p-1">
+        <label for="email" class="w-50">Email: </label>
+        <input id="email" class="w-100" type="text" [(ngModel)]="employee.email" placeholder="employee.email">
+    </div>
+    <div class="d-flex justify-content-between p-1">
+        <label for="tel" class="w-50">Tel: </label>
+        <input id="tel" class="w-100" type="text" [(ngModel)]="employee.tel" placeholder="employee.tel">
+    </div>
+
+    <div>
+        <button class="btn btn-primary" (click)="updateEmployee()">Update</button>
+        <button class="btn btn-primary ml-3" (click)="deleteEmployee()">Delete</button>
+        <button class="btn btn-primary ml-3" (click)="goBack()">go back</button>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="container p-5 m-5 border">
+
+    <div class="d-flex justify-content-end p-1 ">
+        <label>Tạo mới nhân viên</label>
+        <button class="btn btn-primary  p-1 mb-1 float-right w-25 ml-5" (click)="addEmployee()">Add Employee</button>
+        <button class="btn btn-primary  p-1 mb-1 float-right ml-5" (click)="logout()">Logout</button>
+    </div>
+
+
+    <div class="mt-4 mb-4">Tìm kiếm nhân viên bằng tên. Nếu không có điều kiện, thì hiển thị toàn bộ</div>
+
+    <div class="">
+        <input type="text" [(ngModel)]='searching' class="w-50">
+        <span class="ml-3">
+            <button class="btn btn-primary" (click)='getEmployees()'>Searching</button>
+        </span>
+        <!-- <span class="ml-3">
+            <button class="btn btn-primary" (click)='getFullEmployees()'>Back to Full List</button>
+        </span> -->
+    </div>
+    <div [hidden]="hideWarningSearching" class="text-danger mt-4 mb-4">
+        Không tìm thấy user thích hợp
+    </div>
+    <div class=" mb-4 p-4">
+        <div class="row bg-primary border" style="height: 50px">
+            <div class="col-1 font-weight-bold align-self-center">
+                Id
+            </div>
+            <div class="col-4 font-weight-bold align-self-center">
+                Name
+            </div>
+            <div class="col-4 font-weight-bold align-self-center">
+                Email
+            </div>
+            <div class="col-2 font-weight-bold align-self-center">
+                Tel
+            </div>
+            <div class="col-1 font-weight-bold align-self-center">
+
+            </div>
+        </div>
+        
+        <div *ngFor='let employee of employees| paginate : {
+            itemsPerPage: pageSize,
+            currentPage: page,
+            totalItems: count
+          }; let i = index' class="row">
+            <div class="col-1 border">
+                {{employee.id}}
+            </div>
+            <div class="col-4 border">
+                {{employee.name}}
+            </div>
+            <div class="col-4 border">
+                {{employee.email}}
+            </div>
+            <div class="col-2 border">
+                {{employee.tel}}
+            </div>
+            <div class="col-1 border">
+                <a class="btn btn-primary" routerLink="/detail/{{employee.id}}">
+                    <span>Details</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-12 mt-4">
+            <pagination-controls previousLabel="Prev" nextLabel="Next" (responsive)=true
+                (pageChange)="handlePageChange($event)"></pagination-controls>
+        </div>
+    </div>
+
+</div>

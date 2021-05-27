@@ -1,0 +1,94 @@
+<div class="container p-5 m-5 border rounded">
+    <div [hidden]='HideAdd'>
+        <div class="d-flex justify-content-between p-1">
+            <div>Đăng kí nhân viên mới</div>
+            <button class="btn btn-primary  p-1 mb-1 float-right ml-5" (click)="logout()">Logout</button>
+        </div>
+        <div [hidden] = "hideWarning" class="text-danger mt-4 mb-4">
+            <ul>
+                <li *ngFor="let message of messages">
+                    <div class="text-danger mt-4 mb-4">
+                        {{message}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex justify-content-between p-1">
+            <label for="name" class="w-50">Name: </label>
+            <input class="w-100" type="text" name="name" [(ngModel)]="employeeService.Current.name"
+                placeholder={{employeeService.Current.name}}>
+        </div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="email">Email: </label>
+            <input class="w-100" type="text" name="email" [(ngModel)]="employeeService.Current.email"
+                placeholder={{employeeService.Current.email}}>
+        </div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="tel">Tel: </label>
+            <input class="w-100" type="text" name="tel" [(ngModel)]="employeeService.Current.tel"
+                placeholder={{employeeService.Current.tel}}>
+        </div>
+        <div>
+            <button class="btn btn-primary" (click)="OKAdd()">Add Employee</button>
+            <button class="btn btn-primary ml-3" (click)="goBack()">Back</button>
+        </div>
+    </div>
+
+    <div [hidden]='HideUpdate'>
+        <div>Xác nhận thông tin</div>
+        <div>Ấn nút OK để ghi thông tin vào DB</div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="id">Name: </label>
+            <input class="w-100" type="text" name="id" readonly [(ngModel)]="employeeService.Current.id"
+                placeholder={{employeeService.Current.id}}>
+        </div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="name">Name: </label>
+            <input class="w-100" type="text" name="name" readonly [(ngModel)]="employeeService.Current.name"
+                placeholder={{employeeService.Current.name}}>
+        </div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="email">Email: </label>
+            <input class="w-100" type="text" name="email" readonly [(ngModel)]="employeeService.Current.email"
+                placeholder={{employeeService.Current.email}}>
+        </div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="tel">Tel: </label>
+            <input class="w-100" type="text" name="tel" readonly [(ngModel)]="employeeService.Current.tel"
+                placeholder={{employeeService.Current.tel}}>
+        </div>
+        <div>
+            <button class="btn btn-primary" (click)="OKUpdate()">OK</button>
+            <button class="btn btn-primary ml-3" (click)="goBack()">Back</button>
+        </div>
+    </div>
+
+    <div [hidden]='HideDelete'>
+        <div>Xác nhận thông tin</div>
+        <div>Ấn nút Delete để xóa thông tin từ DB</div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="id">Name: </label>
+            <input class="w-100" type="text" name="id" readonly [(ngModel)]="employeeService.Current.id"
+                placeholder={{employeeService.Current.id}}>
+        </div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="name">Name: </label>
+            <input class="w-100" type="text" name="name" readonly [(ngModel)]="employeeService.Current.name"
+                placeholder={{employeeService.Current.name}}>
+        </div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="email">Email: </label>
+            <input class="w-100" type="text" name="email" readonly [(ngModel)]="employeeService.Current.email"
+                placeholder={{employeeService.Current.email}}>
+        </div>
+        <div class="d-flex justify-content-between p-1">
+            <label class="w-50" for="tel">Tel: </label>
+            <input class="w-100" type="text" name="tel" readonly [(ngModel)]="employeeService.Current.tel"
+                placeholder={{employeeService.Current.tel}}>
+        </div>
+        <div>
+            <button class="btn btn-primary" (click)="OKDelete()">Delete</button>
+            <button class="btn btn-primary ml-3" (click)="goBack()">Back</button>
+        </div>
+    </div>
+</div>
