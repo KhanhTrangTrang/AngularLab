@@ -22,30 +22,32 @@ export class EmployeesComponent implements OnInit {
   constructor(private employeesService: EmployeesService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getEmployees();
+    this.init();
+  }
+  employees: Employee[] = [];
+  // Khởi tạo dữ liệu ban đầu
+  async init(): Promise<void> {
+    if (!this.employeesService.isLogin())
+      this.logout();
+    // Gọi api lấy thông tin tất cả nhân viên từ server
+    await this.employeesService.getEmployees();
+    this.employees = this.employeesService.empoyees;
+    this.hideWarningSearching = true;
+    this.count = this.employees.length;
+    this.pageSize = 5;
   }
 
-  employees: Employee[] = [];
-  // Khởi tạo thông tin nhân viên, chỉ số trang hiện tại
-  setEmployees(employees: Employee[]): void {
+  getEmployees(): void {
     this.hideWarningSearching = true;
-    this.employeesService.empoyees = employees;
     if (this.searching === '')
-      this.employees = employees;
+      this.employees = this.employeesService.empoyees;
     else {
-      this.employees = employees.filter(x => x.name.includes(this.searching));
+      this.employees = this.employeesService.empoyees.filter(x => x.name.includes(this.searching));
       if (this.employees.length === 0)
         this.hideWarningSearching = false;
     }
     this.count = this.employees.length;
     this.pageSize = 5;
-
-  }
-  // Lấy ra tất cả nhân viên đã lưu vào data base
-  getEmployees(): void {
-    if (!this.employeesService.isLogin())
-      this.logout();
-    this.employeesService.getEmployees().subscribe(val => this.setEmployees(val));
   }
 
   // getFullEmployees(): void {

@@ -35,9 +35,9 @@ export class EmployeesService {
   set Type(type: ConfirmType) {this.type = type}
   get Type() { return this.type; }
   // Lấy thông tin tất cả nhân viên từ server
-  getEmployees()
+  async getEmployees()
   {
-      return this.http.get<Employee[]>(this.url);
+      this.empoyees =  await this.http.get<Employee[]>(this.url).toPromise();
   }
   getEmployeeById(id: number)
   {
