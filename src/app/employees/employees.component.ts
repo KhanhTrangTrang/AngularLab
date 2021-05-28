@@ -16,8 +16,12 @@ export class EmployeesComponent implements OnInit {
 
   page = 1;
   count = 0;
-  pageSize = 5;
+  pageSize = 3;
   pageSizes = [3, 6, 9];
+
+  totalPage = 0;
+
+  pageShows: number[] = [];
 
   constructor(private employeesService: EmployeesService, private router: Router) { }
 
@@ -34,7 +38,31 @@ export class EmployeesComponent implements OnInit {
     this.employees = this.employeesService.empoyees;
     this.hideWarningSearching = true;
     this.count = this.employees.length;
-    this.pageSize = 5;
+    this.pageSize = 3;
+    this.totalPage = Math.ceil(this.count / this.pageSize);
+
+    if (this.totalPage <= 3) {
+      for (let i = 1; i <= this.totalPage; i++) {
+        this.pageShows.push(i)
+      }
+    }
+    else {
+      if (this.page == 1) {
+        for (let i = 1; i <= 3; i++) {
+          this.pageShows.push(i)
+        }
+      }
+      if (this.page == this.totalPage) {
+        for (let i = this.totalPage - 2; i <= this.totalPage; i++) {
+          this.pageShows.push(i)
+        }
+      }
+      if (this.page > 1 && this.page < this.totalPage) {
+        for (let i = this.page - 1; i <= this.page + 1; i++) {
+          this.pageShows.push(i)
+        }
+      }
+    }
   }
 
   getEmployees(): void {
@@ -42,12 +70,12 @@ export class EmployeesComponent implements OnInit {
     if (this.searching === '')
       this.employees = this.employeesService.empoyees;
     else {
-      this.employees = this.employeesService.empoyees.filter(x => x.name.includes(this.searching));
+      this.employees = this.employeesService.empoyees.filter(x => x.name.toLocaleLowerCase().includes(this.searching.toLocaleLowerCase()));
       if (this.employees.length === 0)
         this.hideWarningSearching = false;
     }
     this.count = this.employees.length;
-    this.pageSize = 5;
+    this.pageSize = 3;
   }
 
   // getFullEmployees(): void {
@@ -74,7 +102,31 @@ export class EmployeesComponent implements OnInit {
     this.router.navigate(['/login']);
   }
   // Xử lí việc thay đổi trang
-  handlePageChange(event: any): void {
-    this.page = event;
+
+  onPageChange(a: number) {
+    this.page = a;
+    this.pageShows = []
+    if (this.totalPage <= 3) {
+      for (let i = 1; i <= this.totalPage; i++) {
+        this.pageShows.push(i)
+      }
+    }
+    else {
+      if (this.page == 1) {
+        for (let i = 1; i <= 3; i++) {
+          this.pageShows.push(i)
+        }
+      }
+      if (this.page == this.totalPage) {
+        for (let i = this.totalPage - 2; i <= this.totalPage; i++) {
+          this.pageShows.push(i)
+        }
+      }
+      if (this.page > 1 && this.page < this.totalPage) {
+        for (let i = this.page - 1; i <= this.page + 1; i++) {
+          this.pageShows.push(i)
+        }
+      }
+    }
   }
 }

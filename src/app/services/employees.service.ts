@@ -11,7 +11,7 @@ export class EmployeesService {
   private httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  private url = 'http://localhost:8098/api/employees';
+  private url = 'http://10.1.11.102:8098/api/employees';
   // Lưu lại tất cả nhân viên sau khi lấy từ server
   empoyees: Employee[] = [];
   // Thông tin user hiện tại dùng trong việc thêm sửa xóa nhân viên
