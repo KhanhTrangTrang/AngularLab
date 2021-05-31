@@ -16,7 +16,7 @@ export class EmployeesComponent implements OnInit {
 
   page = 1;
   count = 0;
-  pageSize = 3;
+  pageSize = 5;
   pageSizes = [3, 6, 9];
 
   totalPage = 0;
@@ -37,32 +37,8 @@ export class EmployeesComponent implements OnInit {
     await this.employeesService.getEmployees();
     this.employees = this.employeesService.empoyees;
     this.hideWarningSearching = true;
-    this.count = this.employees.length;
-    this.pageSize = 3;
-    this.totalPage = Math.ceil(this.count / this.pageSize);
 
-    if (this.totalPage <= 3) {
-      for (let i = 1; i <= this.totalPage; i++) {
-        this.pageShows.push(i)
-      }
-    }
-    else {
-      if (this.page == 1) {
-        for (let i = 1; i <= 3; i++) {
-          this.pageShows.push(i)
-        }
-      }
-      if (this.page == this.totalPage) {
-        for (let i = this.totalPage - 2; i <= this.totalPage; i++) {
-          this.pageShows.push(i)
-        }
-      }
-      if (this.page > 1 && this.page < this.totalPage) {
-        for (let i = this.page - 1; i <= this.page + 1; i++) {
-          this.pageShows.push(i)
-        }
-      }
-    }
+    this.arrangePage();
   }
 
   getEmployees(): void {
@@ -70,12 +46,11 @@ export class EmployeesComponent implements OnInit {
     if (this.searching === '')
       this.employees = this.employeesService.empoyees;
     else {
-      this.employees = this.employeesService.empoyees.filter(x => x.name.toLocaleLowerCase().includes(this.searching.toLocaleLowerCase()));
+      this.employees = this.employeesService.empoyees.filter(x => x.name.toLocaleLowerCase().includes(this.searching.trim().toLocaleLowerCase()));
       if (this.employees.length === 0)
         this.hideWarningSearching = false;
     }
-    this.count = this.employees.length;
-    this.pageSize = 3;
+    this.arrangePage();
   }
 
   // getFullEmployees(): void {
@@ -105,6 +80,13 @@ export class EmployeesComponent implements OnInit {
 
   onPageChange(a: number) {
     this.page = a;
+    this.arrangePage();
+  }
+  arrangePage()
+  {
+    this.count = this.employees.length;
+    this.pageSize = 5;
+    this.totalPage = Math.ceil(this.count / this.pageSize);
     this.pageShows = []
     if (this.totalPage <= 3) {
       for (let i = 1; i <= this.totalPage; i++) {
