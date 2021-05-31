@@ -49,7 +49,8 @@ export class EmployeesComponent implements OnInit {
       this.employees = this.employeesService.empoyees.filter(x => x.name.toLocaleLowerCase().includes(this.searching.trim().toLocaleLowerCase()));
       if (this.employees.length === 0)
         this.hideWarningSearching = false;
-    }
+    }  
+    this.page = 1;
     this.arrangePage();
   }
 
